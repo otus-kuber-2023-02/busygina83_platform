@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bob
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admin
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: crb01
+subjects:
+- kind: ServiceAccount
+  name: bob
+  namespace: all
+roleRef:
+  kind: ClusterRole
+  name: admin
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dave
