@@ -1,0 +1,1755 @@
+#helm upgrade --install harbor harbor/harbor --wait --namespace=harbor -f values.yaml --version 1.11.1 --dry-run > ../helmfile/helmfile-harbor.yaml
+#echo http://127.0.0.1:8080/
+#kubectl port-forward pod/harbor-portal-d655475f9-lvdcp 8080:8080 --namespace harbor
+
+#Release "harbor" has been upgraded. Happy Helming!
+#NAME: harbor
+#LAST DEPLOYED: Sun Apr  2 21:28:50 2023
+#NAMESPACE: harbor
+#STATUS: pending-upgrade
+#REVISION: 5
+#TEST SUITE: None
+#HOOKS:
+#MANIFEST:
+#---
+# Source: harbor/templates/chartmuseum/chartmuseum-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-chartmuseum"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  CACHE_REDIS_PASSWORD: ""
+---
+# Source: harbor/templates/core/core-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-core
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  secretKey: "bm90LWEtc2VjdXJlLWtleQ=="
+  secret: "b3BsaGx0QlhuSHNPRE1OMA=="
+  tls.key: "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBd0QrbmxLV1pLRStXRHJLeGM5NUxxY01wdmxNTFBIN1VLbmsxOFlQb3d2UzltdXFoCjd1c09Sakp6S09VRU55VG1MQzBXZXZMNjlwMTQ4dTA3aDRkN05IaW5ZQk5xNG5KbzRlOVZsN3U0NHNOR0kreGoKL21yd3JFZ3RvRkcxV3ByazdJVDRXR21mZmpUZ2x1RlVjeG9oSVViMHBDcTJZZERoZk8wMy9SaExORmpGMXlrOQpNa2lrNTNybDNERlZJR245aitPYVg4ZW5iUm1rMG50NW5JbmZSUFlhalBOaGQxeGR4L0NsK0lYcmVBY0liSHRVClBlczVoMG5IMGp1VkRPMWFlS2hXODB3OC96UHJhNkxNamdySXVWU0ZXdFkxVEdhQnMyMGpoOFlCalRzNkZhd2IKOUZZYnB6NVNjYlZIT0JKVVpPZEhLYWhINDZIZ1ZYcVVQZG81N3dJREFRQUJBb0lCQUZJb0ljNlZna0ZHMmFMSQpYS3RlbVVrZ0hTdTN3M3FEM05tVjJTYXdMMzE1SjdvWGdVSmY4MGF1Y3FaTVVLUGNRZjBvKzQxcFh6U2JFVUFICmY4UW9jczkyckZpVGs3N1lFOWhSOW1zVWp5dGhOZzFPRFdHQmcvNnNEY3VRZjRjTDRMN3ZDRTZJUE4rcmF6c3YKYW02U0FReCtqVGZIQlJBQ093cXZPWmtRazdyM1kxN2xtSWo5Y2loZUtjU3psU21Tb3VMUW1hZ3F1ZWVNREs0Qwo2SjBMcVpoZFBZRWhlS3Z4YXAxWU1Xb2ltMzFzMkF4QXJEY1NBQUJ5MitQa1JzbFFIVHYySDJSSVhtWUhYdW1nCkdkS2tUU1pva3NUNHE1ai9IZG9QSWhWRkRQSVh5SHZEU3lWUkozaCs0eWIvWU1oME5uT2hmZDYzaThWbG5EMWgKUDZsYkRPa0NnWUVBMzBKTDhubEtoTmYxL0I2UXZqNGF6Vy9nK21VS1Q2OElBM2pIZ2FFcXdYMzNnMHlmZFltNQo1bUI3Umw3NWRLSTAyVmUzdXR5ZUI1T3l5V01zNC9sTjZRQXlBNHBETUh1SUVqVFlQLzlyOUcra1cvdVIrT1VBCm1vQW4rT05qa0I0cW5pRzZrS1drZ3BIMHJITUEwREtnYkhXV2o5Qnp1eGFkY0JLY29ZQlRiRjBDZ1lFQTNIRW4KQ3cvMHpPM0hSYms2UEFqU0JaNEVpa1hSR0VrK1h3MmprSldOWEp2L3JnUmRxdER4Q3Zack5oaytCZkxwbEZibwpaUklwRnRZajRqRVZNWTl1eXNoSzdxc1lzUG9kN3JqSnpmZ3FYS3IyOGMrTjhMa1hCOC91T3JMTVNma0IrcUErCnoyMHZGMER3bGYyb2R5SHErVWFpdlRiOUFlYTNsb0ZrcHdZQk9yc0NnWUE5bllkbVVQRXUvb2NsNEsyanczSVUKTm9kSnM2OEgxTStLWGIvNTE2ZjhKSzYxcnVUblJHNW8xVUhRWncvRGo2eTBPeEE2NHY0K0t4WVJuR3hjTW9hOQpBay9MU0ZKSXhCOEduMHo3Ukp2ZnB4d2VRcXpEbXpmeWErSWNQMjFQN2ZObkZ2bnRSN25DUzFQU2NCN09WdHFOCmRGcHNNR1J3UXNxS2pxaHByZ2ZZQlFLQmdCSVJ4RjJIeFUwM0FHcWFzRWRUZ2NPc0hEc3BWZVpqdXBVWURSeEEKNWdGOVdBdnZsNjMweW8xWGZacEZuMnZsYVhnYlY1bFJUOFRyY0syTjBHcnJrdTFVVmJBU25rZURlUWlrWlFaWgpIVC9UVThLbWZNQUtxL1NiK3E4ZEVOblBhM1lieElwRUxPUC9Fcmw0dldKbWlWZzlqZ0ZzakhpbmJNME5kaTZxCnMxY1pBb0dCQUlJSVdlNWdhWW1MTUVZaTE0aFFpdHFpTy91T3dnV0RXOVA5YmthRFpkLzkvSmhING1kVnFsckYKZHJrdnZNUHFvOExXZUVFbmNPdm1HRDV1L3MvTHdYQWt3UXgyTERLeEthWDFtR3pHMU01UDhDd0J2Tmw0YlBsUApjQjZLL1VIcWRvNGZ4c2o3N0ZGUUJYRGNNSUF3THNqZmsyMXBKaGVTY1RpS2xFbUtTeWg4Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg=="
+  tls.crt: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIekNDQWdlZ0F3SUJBZ0lRSjJnTkZsZ0ljQlJvbUZtN1lESWtFekFOQmdrcWhraUc5dzBCQVFzRkFEQWEKTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3SGhjTk1qTXdOREF5TVRneU9EVXdXaGNOTWpRdwpOREF4TVRneU9EVXdXakFhTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3Z2dFaU1BMEdDU3FHClNJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURBUDZlVXBaa29UNVlPc3JGejNrdXB3eW0rVXdzOGZ0UXEKZVRYeGcrakM5TDJhNnFIdTZ3NUdNbk1vNVFRM0pPWXNMUlo2OHZyMm5Yank3VHVIaDNzMGVLZGdFMnJpY21qaAo3MVdYdTdqaXcwWWo3R1ArYXZDc1NDMmdVYlZhbXVUc2hQaFlhWjkrTk9DVzRWUnpHaUVoUnZTa0tyWmgwT0Y4CjdUZjlHRXMwV01YWEtUMHlTS1RuZXVYY01WVWdhZjJQNDVwZng2ZHRHYVRTZTNtY2lkOUU5aHFNODJGM1hGM0gKOEtYNGhldDRCd2hzZTFROTZ6bUhTY2ZTTzVVTTdWcDRxRmJ6VER6L00rdHJvc3lPQ3NpNVZJVmExalZNWm9HegpiU09IeGdHTk96b1ZyQnYwVmh1blBsSnh0VWM0RWxSazUwY3BxRWZqb2VCVmVwUTkyam52QWdNQkFBR2pZVEJmCk1BNEdBMVVkRHdFQi93UUVBd0lDcERBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXcKRHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVZHg1Z2Z3NEZXblA3eXdZYVNmNEZ5Vjk5QWFrdwpEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTGhObTI5K1VIUHZCYlA4aW15cmFhbWN6Vkh1QVVlbWdQTmVjeTc4CmgwRkZaUnZJYnZab3JWWnhJNG5kcGlnQndLd2R6VlZoaDFERmxzYTNCMW9tMDVRV0lFSTBVcnFLYU5sSWNZODkKamp4emRualUzVkxrSXNtT2RDamtWK0d2SDZ3eS9SNVgyWkp1dS93TSt1Nmg2Y1RxRVg5ZXFZdjVYMjF3V3hacQpJMTZldjdPZHlUVlRZd0xFY05rYmpSZ0dUOFg0OWdudHF2NVBWRGxDRCtUdFo3VUtxN2VqUWk5anFaWVNuYWd6ClZyWG8vQTRGTE4zeW5ad3dFdEpCVUVqTWJtUnQ1dVhXU0NMR3JWT1dIdmgwM2hWV0xpSDlSY01LdEdzUTBqV24KSm4wTHl5L0ozQUxPZGVmUnhhNXMwam92RDlua3BCOHZ5K0puMkRBWDBmUmZvbWM9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+  HARBOR_ADMIN_PASSWORD: "SGFyYm9yMTIzNDU="
+  POSTGRESQL_PASSWORD: "Y2hhbmdlaXQ="
+  REGISTRY_CREDENTIAL_PASSWORD: "aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk"
+  CSRF_KEY: "TGJwcUFxeGVYbkpLbmp6WmQ2eW12ZVF4VVY0cXVJTDk="
+---
+# Source: harbor/templates/database/database-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-database"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  POSTGRES_PASSWORD: "Y2hhbmdlaXQ="
+---
+# Source: harbor/templates/ingress/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-ingress"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: kubernetes.io/tls
+data:
+  tls.crt: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURVekNDQWp1Z0F3SUJBZ0lSQU5XdnNCNkU2Y0tsVnYyMmpCdEgrYkF3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSmFHRnlZbTl5TFdOaE1CNFhEVEl6TURRd01qRTRNamcxTUZvWERUSTBNRFF3TVRFNApNamcxTUZvd0hURWJNQmtHQTFVRUF4TVNZMjl5WlM1b1lYSmliM0l1ZUdsd0xtbHZNSUlCSWpBTkJna3Foa2lHCjl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF4bnVFQ1ROcDR4eHRGZ2hDRElRRzdKcGlxTGlGLy92OGRpZi8KVjk5OXdtMEJuOUYzTFptcFFGUkI0U1dFaS8rWXVNVmVBd2FBR0hTVldBZVRwU1BoUWZPVnhSZng2aExURDZzWgpjaDMwemRmdmEralhWeEIrd2psMUJESzdoOE5VME5EL2U0STVnTVBiYjVZVi9CNVFpdnJ5bHBkckF3UENvWk5RCnQ2REkxMXVFRE9BY3dIaEEzSzdTNGNTWHJoZVA4bWdVdnprU0xFaVhuUGtmV1NLOUYxeDJQQVJvRzZuSHh4RngKYkhVNzVZRHFMcmRhSFBPeVhWVEhtRnMxOVRrVzE1VHFTTG9XdTdFU1Uydm1xcjFDd1lTRjZUTjFwR1h3NHZaOQp4WEhsSFRwMkRTSVVCVEZvZjJZZkxleWp1Z0JwaVMxSVhyVnVld3RQQkgwYzZRUlAwUUlEQVFBQm80R1dNSUdUCk1BNEdBMVVkRHdFQi93UUVBd0lGb0RBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXcKREFZRFZSMFRBUUgvQkFJd0FEQWZCZ05WSFNNRUdEQVdnQlJSdUlUeGNRbXdNOTBIMlFwaGN0c01DR1d6bXpBegpCZ05WSFJFRUxEQXFnaEpqYjNKbExtaGhjbUp2Y2k1NGFYQXVhVytDRkc1dmRHRnllUzVvWVhKaWIzSXVlR2x3CkxtbHZNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUNzb2xRclYxc2VtbVlUdGtmcVZkTnJnTzM3djZhOXFwN0EKektUS095NUwwOGhxSWtXQmJkTVI2RStQVGsvTXIzbkI4Ynl1d3NsMnVleU81eFNEQjBTckFKN3ZRU3A3MFVzdgpQK1B3ejhRbzB0dVM0V2RFTDQ0Z1ArS1JWb2ZXOVUyckJvRlJEbjZlcnBMUVFMRWVVWmNvVktvVVFZZ2VFZ2doClhMUEwydExSUDh5cFQ3TmNKVzk0d3lhRGxBYTd3VHV4aS92VllnQWpqQTRNczQ2TUtpWDRmeWhtNlRKbFptb0EKVDFiMk1DaVN3RVVqaVlUOUtJMmxSZ2JUL080WjBtOU9DakhrUDJUL0JmWUtKMDVZQjhhb3dBdDZYN01sRFU5YworNHFVYnpaTHRYSm84OGZWd0JreHlsaUFsZkxaZ0o2azFjMDZ6ZXplakhweXNOdGprT0ZUCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+  tls.key: "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBeG51RUNUTnA0eHh0RmdoQ0RJUUc3SnBpcUxpRi8vdjhkaWYvVjk5OXdtMEJuOUYzCkxabXBRRlJCNFNXRWkvK1l1TVZlQXdhQUdIU1ZXQWVUcFNQaFFmT1Z4UmZ4NmhMVEQ2c1pjaDMwemRmdmEralgKVnhCK3dqbDFCREs3aDhOVTBORC9lNEk1Z01QYmI1WVYvQjVRaXZyeWxwZHJBd1BDb1pOUXQ2REkxMXVFRE9BYwp3SGhBM0s3UzRjU1hyaGVQOG1nVXZ6a1NMRWlYblBrZldTSzlGMXgyUEFSb0c2bkh4eEZ4YkhVNzVZRHFMcmRhCkhQT3lYVlRIbUZzMTlUa1cxNVRxU0xvV3U3RVNVMnZtcXIxQ3dZU0Y2VE4xcEdYdzR2Wjl4WEhsSFRwMkRTSVUKQlRGb2YyWWZMZXlqdWdCcGlTMUlYclZ1ZXd0UEJIMGM2UVJQMFFJREFRQUJBb0lCQUNhVDUwdnFoRkF5UERtbQpEVUJsZ1BzSDN0a3dWRXMyN1JFQ0lTMHhNVDVTOVpmY25LOXVTR2xLZHl1Tm9UK2N4RkJWZkRwV1R4dHh2WDFJCnE3ZlRTM3NJSHpvWnQxbHBvMEJPWHpuQS9NM3RoSW1TemhnTUNyY3hkNzhESlZQejhVNU04UHRPaW1LdXJyMzMKaS9wZTRnVEJWZGxUUU9kckdhOVI5TVJjS2UxQmNyNmxXYWVJMFdOZ202WTBGODNvWC9iZzl5cUpNM3oxSE9UaQpvRGx0NWFFeTNNN3hNZ3J3TXN1dTZsSXdQbjJvLytaSmphdVFKajFRVWIxNFkyZml5TnpkQlZFS0haRFJ2cjlFCmFVcXRzUlYrM0pOUi9NMStPUmlSVGJCd2xhbE5Za09xaXhOQjdGSEMrMHQ4OHhFTDlrNVZXaTg4NWhYU3NPNjUKSnNJRXN1RUNnWUVBNEc0SUthZTkzeGRuRGJXbWxlNTlzSng5cDM3eDlUY0dsTGZYMUtYeHpDL1NQcDJBVnBMNwpGd0Nhd0toMFZpSzZCbjJrUEYrSzZiK1ErNWtieG9LL1dtNElVajAzZzd2U01sNFMxMGZVTG9BNjhNZXVnb3JnCkxaVTVKelZRNlhMcXcvVi9GR1dURVhGbEZ2OTJuL2dtUkpvd29HL0JLaFhNS2QwTjZhdnVta1VDZ1lFQTRtY1gKYzRBNFN4ak9GSXBoQXQrMmlLYVJXcnM1MlMvRTdhd2FlZ0lNL0ZhQjcrQW5YQmVtYW0vWmtjRGJZZGdDakJUagptMTIxbVlUVk9GMitNUm1GVmxNcHdHWXpZT1hyTHVGalZyWEZyQ0I5V2hUT2RwWkVKMENCN05zcXRVbGhncmpOCkc1QVZVeW1DNFRrd0pTaTYySG93SW80NVZkTlRCcjBKanVZeDNoMENnWUJIamUxZVVwUHY4QWMwVU1rM0hsM0cKbEc1Zm05TExDdXMzT1ZKQUExU1BkR1BGQVBSdEpkbVdZT1AyTHY5QWd6dnFXOTZrUFJZT0pyeXo2d0gzRGJLeQp3MGcxNkR5dDdKRTg2ODk0QWZlOWg3YkRFL2NvdWR4MXpCRDMxa0RnM1huS1ZwaFl5WFhWWnVFREx4b0VNTnNLCm5scUluSGpxMFI1UjdwL0Q4OFJVUFFLQmdDQkdzQ293S2xaU1ovYTNyNUxZVDg1MWFKMTF1WTZENStBMk8rUU8KN01rQWtDK2hWaHNqNS82ZWlYYms5cUdoU09PdGlyRTRqODRlQ01PcllaVGdYWWpyL0RUSW5TU0FRcUlCVWNjbgp6TkY0SkVhMlZxVERVVjRETFVLV0VDV2VHMyttVnQ5S0VEQTE1OG14L0hJZnQxdHJOL2VGTFJsV01pend3QzhXCkZCL2xBb0dBYzlnSFBrM1g2NXdOR3BBNzYyZkwzYXhLSjBuRlRkaU5DQ3l2OFE4cDEzelMvdHVNcm5UbHJoT1UKOXBKMmlpcUxwNVRhNTFaSUtCZjBJOTdWWnduZHNseTlEeVlIVjZUUHJ5RU5DMTB6bU9qUWhWN2N3ZmxXc0gwRgpFTWd2Q3VGcmhBVUw4VEt0RXhTSGN2c0drVnV5Y3RCT2FnYzFMVUFubWh2R1MxTGJJTW89Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg=="
+  ca.crt: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRQlZDRjlNd3hwRTIwbEdMdG53WVVaekFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsb1lYSmliM0l0WTJFd0hoY05Nak13TkRBeU1UZ3lPRFV3V2hjTk1qUXdOREF4TVRneQpPRFV3V2pBVU1SSXdFQVlEVlFRREV3bG9ZWEppYjNJdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRRENHR2MwR29IaUJMbTlodFA0d2ZlYmtxeHJ4aDNCM1BBemp2d2p0OEt3WWtBaksxUjgKcEE4UUhESFBuVXNySlJnWVU0dnFCSTdDS0Q2dHhRVndVMStyNUxsd21xek5YUFUyZWVqQ2poRWVqOUtOTFh6MApWdTFEZk1oUnZHRDBGdndjQTBpRHVmQmpyWm1LaWptWVdiRUVGV0lmMWtSZGxzeHl0MngyeUY0ZVBURnhMOU0wCmNQUkJhd0hVU05PZEZDSFNXckpRbUhOUm5OYWR3a0o0TnVvVGV0S21DM3RJYkx6TW51NTFLY2ZtSnF4OWFjOE4KdnBQcm1YRmhwZEdKbkpSQkxQN2xoSnVpWk52eC9saHk5djV4cnFzTGVvWlB1RE90ejZlRG1zVVpTUGtYaWRYQQpneWhxRTNkdVFkcmttR1hETWQyK3NTNHBBVXlETVdwV2V4V3ZBZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVVVYmlFOFhFSnNEUGRCOWtLWVhMYkRBaGxzNXN3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFHelRuV1BMbXlZZGhrRk1HUE1lNmVhNVQrdjBrbDlSRjBiN0hYN0RtM1RSbXA2d2RKMUNFaHJDClpGZ1V5STMyY3kxaHFFWjhyZjBUWldHTG0wU1BOMWYzck5Jbi9kRG5GSTRoaUM2aXF0MGFpQU4wL1ZZbXdtUkQKQ1ptSTkvS1ZIM0V6ajVISUthQzU5NkVGZjdjN2wyVVhHTHUvc3p4dUlkWGhHQlIyQm1RNjkxMURJbzlDKzhjbgpBcmJ1eVZOWWlhK2I4K2RyclZsTEFYWThtV0h4N1RnUzltUGxpZlpsOFJhVVZGaUw5eVpPcW45WWxCU1ZCWXlvCjBlMkRLSkFUN2d0dWMvcy9UQm9MM1U5RDF4OSt5dGhlUjN0N2t6WkpiNGJlY1JCRktGckpMRXpuUDlQUjVPNFIKanE1di8weFlBKzlHejNTcktUdTJ4L0JxNmVZYi9hUT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+---
+# Source: harbor/templates/jobservice/jobservice-secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-jobservice"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  JOBSERVICE_SECRET: "b25pblRjUFkzRzZDRWJycg=="
+  REGISTRY_CREDENTIAL_PASSWORD: "aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk"
+---
+# Source: harbor/templates/notary/notary-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-notary-server
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: notary
+type: Opaque
+data:
+  ca.crt: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJakNDQWdxZ0F3SUJBZ0lSQUlTNmdCVExFUTlNSVFOeU94TkRlZUl3RFFZSktvWklodmNOQVFFTEJRQXcKR3pFWk1CY0dBMVVFQXhNUWFHRnlZbTl5TFc1dmRHRnllUzFqWVRBZUZ3MHlNekEwTURJeE9ESTRORGxhRncweQpOREEwTURFeE9ESTRORGxhTUJzeEdUQVhCZ05WQkFNVEVHaGhjbUp2Y2kxdWIzUmhjbmt0WTJFd2dnRWlNQTBHCkNTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFEaWpaQzZ6Mk5RL24xTGZta2lCbjFrQkxXeHpOL0wKZGVzWXRyMkI2S3dtSTZTeEFzUjBDYi9BMlNLeDNzWkNZMFlsYmJFSGprdWlOSHRvWHNTL29VMThnZVdNMFFzcgpmSXhkYStQYUtaMmZpL0U2OGZJWW5QVjg5SEZCTkJjbVQ3LzlWTmtweFJmMXRZMkNwQ1hDby8rclZMcjhGZTU2CkxhTnk3UHhIUFpGVjk0OEE2S3Y4V1RnYWJ6UVRiaC8vd2h5bUJPdWhuQVNEMEdVN1Z3ZS9mK1Z1RUZyQnl3a1cKa2ZJNlhXdU5pMkhyYnJhL0JNUWNxZ2l2TU4wUHpSQkd6eWVnUTZ4R1RKV09aVHZKNGhka01yL3RPRlIrcUJ6awpuRzg4ekZtb3FMWXZDOXk0YzFmYit5eDc2RHVBSVphYVAzUXlEQzkvbUtNM3JXRjVVN2c1YUltSkFnTUJBQUdqCllUQmZNQTRHQTFVZER3RUIvd1FFQXdJQ3BEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUgKQXdJd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVTBHYmtlVVVGVnQ4WlVvN2tIWXFLa2R3UgpUN293RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUs2c1FyZzhwY2E2cVFhaGpDRzdzMWdwTTM1RTcwQUkrS3hrCmdzcXd5U3VaNmFWNEI1YWZ6eC9GeDh1REVsWCtRUDVMZkFXMDQ0WmhIQ2hHSHlUWFVua1BiWGpWUzN4cXN0REYKck81ZE1UaXg4d0h6MlNkcGU3czJNRGYyU29xa1RvdGk4WGtKbHlpREtFSkVqSHRMY3pTZHFSWXRlUjFzY1ZSUwp4QmY2bHdIaDg0NFhvYlFkWVlCa2w2eUN1L0k0UlRuMWNjdy92UVJMZ3d2V2Q2ZEk5eVRJczQwWWprenR5R3MzCkMxQXRYUHhZZHo5S0o2bU45VlF4SEV5V3VVOUR2Vm9IMmREZ3FmdUkyY01jeUpqQmJhNW0yclNOeGM1aWQ1OU4KaTVxQitwdUU3ODlsSDYxRmdUNWlqU20yKzZsdEZFbnlNT3VjQWhSM1UwcFBmMGNrN3FjPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+  tls.crt: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSakNDQWk2Z0F3SUJBZ0lRRUx1WkpJQldKQUprcmtoeDhLT2RMekFOQmdrcWhraUc5dzBCQVFzRkFEQWIKTVJrd0Z3WURWUVFERXhCb1lYSmliM0l0Ym05MFlYSjVMV05oTUI0WERUSXpNRFF3TWpFNE1qZzBPVm9YRFRJMApNRFF3TVRFNE1qZzBPVm93SHpFZE1Cc0dBMVVFQXhNVWFHRnlZbTl5TFc1dmRHRnllUzF6YVdkdVpYSXdnZ0VpCk1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRFltRW1qNjY2UUtFNUszU0cyZ256cmxnYWUKdFJxS0NINmtYeGsrclp4cmdjWVRjS3JaNjhFM283cXFuNUFoSzY2djI4b2RyQjZnY0JhNVU1UldkVTRsZEhqTgorNldkdkdiWDhBUkFrajJtMENqRTdWZERsbml5OHN6MzQ3OWIvRFZCUUp5MHl5VU5lY3VVRk1kaHljdmRXdHY1ClVtc3ZPR3BVNmFxRFk1WER1Z2JLbWJTMEpoa2JlWjQxMExCWlNHalkyRG5OV3l0eUpTM0ErSkJzMFdJMUFoRjQKWmE5Qytzc25SZG9LcnJveFlyOEVIZEU5NjhqYld0ZlNPMytaci9BckF2M1dKelNueVdmRVVvUDdlM0g2WnYvSQpXbkxWNlVuZVZzb0orS0dla2ZjMXdGRUw3YW9HaUJJcjR6dG1CR0FQQ3NtWkw5MUdSb2lFN21qUWIreURBZ01CCkFBR2pnWUV3ZnpBT0JnTlZIUThCQWY4RUJBTUNCYUF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0cKQVFVRkJ3TUNNQXdHQTFVZEV3RUIvd1FDTUFBd0h3WURWUjBqQkJnd0ZvQVUwR2JrZVVVRlZ0OFpVbzdrSFlxSwprZHdSVDdvd0h3WURWUjBSQkJnd0ZvSVVhR0Z5WW05eUxXNXZkR0Z5ZVMxemFXZHVaWEl3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFJQ0hLRk9OTXRqdGM5U2RBRmVwUFlTdURlRHJpWTBNdU4raHAybTZtZFBzbGdIam5uc2sKTGNZbVVXazVTZ0R1Q0V0LzI2dlRPTWhxbEVhaENPMHVNaTZ3NWpXRDdGMkFValhKbmlDbGhqdzluY3g4U0I3WQpxZ3RXNDM2S0ovcm5qRDhFVk9JNnBkVUNzMklaanF1RVZCeG1sZjg3L1VDRlVNWHB3WmV3UjFFWVVQTytkbkh3CkZTd0xFZUZRQXNTSkZZUXRvN1RWRXJMTENMREhIajFSUm5hSTFkeTByTlBWd3RFWUF0cTU0RGZvak9FUVNIOFUKZTNpRTFYeDBIVDJvcldXQXBIcE4wMkpjblZwZ3ZVRStiR2wwSE8rT0NzenNGdmtIRTVCU3VhbjN3MXJ0TnlPZgpwWitDN1ZNZURHdk02REdtc0h2dzVvbDUwcXRzaDdEK29FST0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+  tls.key: "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBMkpoSm8rdXVrQ2hPU3QwaHRvSjg2NVlHbnJVYWlnaCtwRjhaUHEyY2E0SEdFM0NxCjJldkJONk82cXArUUlTdXVyOXZLSGF3ZW9IQVd1Vk9VVm5WT0pYUjR6ZnVsbmJ4bTEvQUVRSkk5cHRBb3hPMVgKUTVaNHN2TE05K08vVy93MVFVQ2N0TXNsRFhuTGxCVEhZY25MM1ZyYitWSnJMemhxVk9tcWcyT1Z3N29HeXBtMAp0Q1laRzNtZU5kQ3dXVWhvMk5nNXpWc3JjaVV0d1BpUWJORmlOUUlSZUdXdlF2ckxKMFhhQ3E2Nk1XSy9CQjNSClBldkkyMXJYMGp0L21hL3dLd0w5MWljMHA4bG54RktEKzN0eCttYi95RnB5MWVsSjNsYktDZmlobnBIM05jQlIKQysycUJvZ1NLK003WmdSZ0R3ckptUy9kUmthSWhPNW8wRy9zZ3dJREFRQUJBb0lCQVFDNXlIWng2amlEWW04MQplOVB0RHFSRUZ4MTZpSEZKTU53ZjlZcGIzdUtxdkZmQVdRWFRnb3JyUkw5YWx4OHp0SnBVTWJ4K0V5TDZEdXNPCjhBZnUyUk84d05qV0ppSDYySjJHWDFQbVp3b0d5Y29Pa0Y0bmxTdldvcmo1Y0JxMXRmR2dGT0hWbWVJZ1d2WXEKQUdDOUdqQ0puK1BMU2N5eVpqdWV0Z2NTU0Jzd0ZBM0pFM1E1WTcwNlVQQTYxQVFnKzhMcy84N1RjbVZpTDdRNQpCSkhxRHdJMW0ybldnZTJoMHNYSE9JNkM3OXIzU1NhemY4Z2J2V3pmUVUzTGZwckl0STFKZ1RpRUt0UDg0aUdECkthR0dCR1NSQlFQY01Mc0d1VHd4MkFvMFRpTGZUSG5QTjRwUmc3WlpwK3Q4NXJjMlRqMTZTMEswbWNWdEJnK2EKUWV6cWsxUFJBb0dCQU51V3pwYUlKU09KcWNDdU5rV0ZEL05vQ1o5L1JLTmE0ZmhkRTZZelNUQklUYzJUdmxHZAo1QkNMMnoxSEFjMDY2VUFYaFZ2VUhtZEplZUwyQWUrSlNJbDFJVEp3aUFERkpLMUVjUWdoYkxYMXBPSy9sQUlSCkRHSG9UazNCcTYwZk5nQnoyakh4a2VCYXArNFljZ2ZrNTB6ZjdVUWRRNWp5MXhldFl1dWg3czlWQW9HQkFQeUMKWVpPeXhwZVFyRGJGZmNTamtOcFJaaTREZ1hjb0JvZGkvM3pzM1lieUN3N3dkODJNS3RVTVBJSTFKRlVuV1EyUAorNUN0QlpXSmkwZ0lCZzR5RFZUc0ZPcjhpVUs3bG0xVWlodHRLOUtwOC9DRzM1bTYrcisrZmI0SUtRQU81Vjg4CnZmNVllYTVYVEFWRXpwRTdERDZHM2pkR0hFSFJUVU80SDg3cVAxeDNBb0dBVDBGaEV3ZlVqNzBTSGM5REcxaHAKWjJyM2ZpL0xNRUtQS0xzL2FrODhiVWJMZmhXRExhWVZPTHVoeDc0bk1sRysramtERXgrK1VYMDlsdU0vMDVyegpLVm16UDZkS0R5MFlqY2tVR3VFbGdZOUZrZW1mbkJkWEpzZFg2OHlwRC9VaDRvdnVCdlN2dUJCQWFEaytmd2JwClROL05uVFlLdmR0NE1yMkw1SXd2eTNrQ2dZRUFsK1hXelFLK2RHNlRLbCtqU0tjY2ZEaDdQekxjcnRGbEhBeHgKcExUWWpsVU1VZkJXSVZBd2Mvam9iV3VLYjY4NzR1eTZhRTJ0RGtldmdhVlIvemdjelBrM25DUk9iZFpxcDFvegp1a3Z5RU1ncjlvVXIvVTU5aU5zT3lVSWZaK21PRWJ4NGpvaXFxalhaaFZIZThYNlQzd2xDby8ySkFnN21hOVpYClRDR2QvQUVDZ1lCdjJsbGs3NFNudnI2akpFd0VvbzRJUmhjMUtyUGdEdmVMZHlTYkUwYjFOL3J5a0JpTVV6YUcKUlhQcXFOQmJyWlNia1djVEdXazZIS3JYZ1FjMkNXUzluaHhWYW5RK2l3Nk93aEpLdndLc1BPZVM2KzFVSVB1cgo2VlpGZGVHakc0OWlPUktkNUJWMzdzY1hzNHpsUnpLd1BnY2lnbEF5Q21UWmZVUit3L0tmemc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo="
+  server.json: ewogICJzZXJ2ZXIiOiB7CiAgICAiaHR0cF9hZGRyIjogIjo0NDQzIgogIH0sCiAgInRydXN0X3NlcnZpY2UiOiB7CiAgICAidHlwZSI6ICJyZW1vdGUiLAogICAgImhvc3RuYW1lIjogImhhcmJvci1ub3Rhcnktc2lnbmVyIiwKICAgICJwb3J0IjogIjc4OTkiLAogICAgInRsc19jYV9maWxlIjogIi9ldGMvc3NsL25vdGFyeS9jYS5jcnQiLAogICAgImtleV9hbGdvcml0aG0iOiAiZWNkc2EiCiAgfSwKICAibG9nZ2luZyI6IHsKICAgICJsZXZlbCI6ICJpbmZvIgogIH0sCiAgInN0b3JhZ2UiOiB7CiAgICAiYmFja2VuZCI6ICJwb3N0Z3JlcyIsCiAgICAiZGJfdXJsIjogInBvc3RncmVzOi8vcG9zdGdyZXM6Y2hhbmdlaXRAaGFyYm9yLWRhdGFiYXNlOjU0MzIvbm90YXJ5c2VydmVyP3NzbG1vZGU9ZGlzYWJsZSIKICB9LAogICJhdXRoIjogewogICAgInR5cGUiOiAidG9rZW4iLAogICAgIm9wdGlvbnMiOiB7CiAgICAgICJyZWFsbSI6ICJodHRwczovL2NvcmUuaGFyYm9yLnhpcC5pby9zZXJ2aWNlL3Rva2VuIiwKICAgICAgInNlcnZpY2UiOiAiaGFyYm9yLW5vdGFyeSIsCiAgICAgICJpc3N1ZXIiOiAiaGFyYm9yLXRva2VuLWlzc3VlciIsCiAgICAgICJyb290Y2VydGJ1bmRsZSI6ICIvcm9vdC5jcnQiCiAgICB9CiAgfQp9
+  signer.json: ewogICJzZXJ2ZXIiOiB7CiAgICAiZ3JwY19hZGRyIjogIjo3ODk5IiwKICAgICJ0bHNfY2VydF9maWxlIjogIi9ldGMvc3NsL25vdGFyeS90bHMuY3J0IiwKICAgICJ0bHNfa2V5X2ZpbGUiOiAiL2V0Yy9zc2wvbm90YXJ5L3Rscy5rZXkiCiAgfSwKICAibG9nZ2luZyI6IHsKICAgICJsZXZlbCI6ICJpbmZvIgogIH0sCiAgInN0b3JhZ2UiOiB7CiAgICAiYmFja2VuZCI6ICJwb3N0Z3JlcyIsCiAgICAiZGJfdXJsIjogInBvc3RncmVzOi8vcG9zdGdyZXM6Y2hhbmdlaXRAaGFyYm9yLWRhdGFiYXNlOjU0MzIvbm90YXJ5c2lnbmVyP3NzbG1vZGU9ZGlzYWJsZSIsCiAgICAiZGVmYXVsdF9hbGlhcyI6ICJkZWZhdWx0YWxpYXMiCiAgfQp9
+  NOTARY_SERVER_DB_URL: cG9zdGdyZXM6Ly9wb3N0Z3JlczpjaGFuZ2VpdEBoYXJib3ItZGF0YWJhc2U6NTQzMi9ub3RhcnlzZXJ2ZXI/c3NsbW9kZT1kaXNhYmxl
+  NOTARY_SIGNER_DB_URL: cG9zdGdyZXM6Ly9wb3N0Z3JlczpjaGFuZ2VpdEBoYXJib3ItZGF0YWJhc2U6NTQzMi9ub3RhcnlzaWduZXI/c3NsbW9kZT1kaXNhYmxl
+---
+# Source: harbor/templates/registry/registry-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-registry"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  REGISTRY_HTTP_SECRET: "VmhIaDYwMVFJUlBFd3IzVQ=="
+  REGISTRY_REDIS_PASSWORD: ""
+---
+# Source: harbor/templates/registry/registry-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-registry-htpasswd"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  REGISTRY_HTPASSWD: "aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJFAwMHpHL2hUdGlhWWZiOHpobUJoSy5HMEtwR2lHVXU1VVJycXJUaE1yZzkuQlo3QTJieWR1"
+---
+# Source: harbor/templates/registry/registryctl-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "harbor-registryctl"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+---
+# Source: harbor/templates/trivy/trivy-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-trivy
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+type: Opaque
+data:
+  redisURL: cmVkaXM6Ly9oYXJib3ItcmVkaXM6NjM3OS81P2lkbGVfdGltZW91dF9zZWNvbmRzPTMw
+  gitHubToken: ""
+---
+# Source: harbor/templates/chartmuseum/chartmuseum-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-chartmuseum"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  PORT: "9999"
+  CACHE: "redis"
+  CACHE_REDIS_ADDR: "harbor-redis:6379"
+  CACHE_REDIS_DB: "3"
+  BASIC_AUTH_USER: "chart_controller"
+  DEPTH: "1"
+  DEBUG: "false"
+  LOG_JSON: "true"
+  DISABLE_METRICS: "false"
+  DISABLE_API: "false"
+  DISABLE_STATEFILES: "false"
+  ALLOW_OVERWRITE: "true"
+  AUTH_ANONYMOUS_GET: "false"
+  CONTEXT_PATH: ""
+  INDEX_LIMIT: "0"
+  MAX_STORAGE_OBJECTS: "0"
+  MAX_UPLOAD_SIZE: "20971520"
+  CHART_POST_FORM_FIELD_NAME: "chart"
+  PROV_POST_FORM_FIELD_NAME: "prov"
+  STORAGE: "local"
+  STORAGE_LOCAL_ROOTDIR: "/chart_storage"
+  STORAGE_TIMESTAMP_TOLERANCE: 1s
+---
+# Source: harbor/templates/core/core-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-core
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  app.conf: |+
+    appname = Harbor
+    runmode = prod
+    enablegzip = true
+
+    [prod]
+    httpport = 8080
+  PORT: "8080"
+  DATABASE_TYPE: "postgresql"
+  POSTGRESQL_HOST: "harbor-database"
+  POSTGRESQL_PORT: "5432"
+  POSTGRESQL_USERNAME: "postgres"
+  POSTGRESQL_DATABASE: "registry"
+  POSTGRESQL_SSLMODE: "disable"
+  POSTGRESQL_MAX_IDLE_CONNS: "100"
+  POSTGRESQL_MAX_OPEN_CONNS: "900"
+  EXT_ENDPOINT: "https://core.harbor.xip.io"
+  CORE_URL: "http://harbor-core:80"
+  JOBSERVICE_URL: "http://harbor-jobservice"
+  REGISTRY_URL: "http://harbor-registry:5000"
+  TOKEN_SERVICE_URL: "http://harbor-core:80/service/token"
+  WITH_NOTARY: "true"
+  NOTARY_URL: "http://harbor-notary-server:4443"
+  CORE_LOCAL_URL: "http://127.0.0.1:8080"
+  WITH_TRIVY: "true"
+  TRIVY_ADAPTER_URL: "http://harbor-trivy:8080"
+  REGISTRY_STORAGE_PROVIDER_NAME: "filesystem"
+  WITH_CHARTMUSEUM: "true"
+  CHART_REPOSITORY_URL: "http://harbor-chartmuseum"
+  LOG_LEVEL: "info"
+  CONFIG_PATH: "/etc/core/app.conf"
+  CHART_CACHE_DRIVER: "redis"
+  _REDIS_URL_CORE: "redis://harbor-redis:6379/0?idle_timeout_seconds=30"
+  _REDIS_URL_REG: "redis://harbor-redis:6379/2?idle_timeout_seconds=30"
+  PORTAL_URL: "http://harbor-portal"
+  REGISTRY_CONTROLLER_URL: "http://harbor-registry:8080"
+  REGISTRY_CREDENTIAL_USERNAME: "harbor_registry_user"
+  HTTP_PROXY: ""
+  HTTPS_PROXY: ""
+  NO_PROXY: "harbor-core,harbor-jobservice,harbor-database,harbor-chartmuseum,harbor-notary-server,harbor-notary-signer,harbor-registry,harbor-portal,harbor-trivy,harbor-exporter,127.0.0.1,localhost,.local,.internal"
+  PERMITTED_REGISTRY_TYPES_FOR_PROXY_CACHE: "docker-hub,harbor,azure-acr,aws-ecr,google-gcr,quay,docker-registry,jfrog-artifactory"
+---
+# Source: harbor/templates/jobservice/jobservice-cm-env.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-jobservice-env"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  CORE_URL: "http://harbor-core:80"
+  TOKEN_SERVICE_URL: "http://harbor-core:80/service/token"
+  REGISTRY_URL: "http://harbor-registry:5000"
+  REGISTRY_CONTROLLER_URL: "http://harbor-registry:8080"
+  REGISTRY_CREDENTIAL_USERNAME: "harbor_registry_user"
+  HTTP_PROXY: ""
+  HTTPS_PROXY: ""
+  NO_PROXY: "harbor-core,harbor-jobservice,harbor-database,harbor-chartmuseum,harbor-notary-server,harbor-notary-signer,harbor-registry,harbor-portal,harbor-trivy,harbor-exporter,127.0.0.1,localhost,.local,.internal"
+---
+# Source: harbor/templates/jobservice/jobservice-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-jobservice"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  config.yml: |+
+    #Server listening port
+    protocol: "http"
+    port: 8080
+    worker_pool:
+      workers: 10
+      backend: "redis"
+      redis_pool:
+        redis_url: "redis://harbor-redis:6379/1"
+        namespace: "harbor_job_service_namespace"
+        idle_timeout_second: 3600
+    job_loggers:
+      - name: "FILE"
+        level: INFO
+        settings: # Customized settings of logger
+          base_dir: "/var/log/jobs"
+        sweeper:
+          duration: 14 #days
+          settings: # Customized settings of sweeper
+            work_dir: "/var/log/jobs"
+    metric:
+      enabled: false
+      path: /metrics
+      port: 8001
+    #Loggers for the job service
+    loggers:
+      - name: "STD_OUTPUT"
+        level: INFO
+---
+# Source: harbor/templates/portal/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-portal"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  nginx.conf: |+
+    worker_processes auto;
+    pid /tmp/nginx.pid;
+    events {
+        worker_connections  1024;
+    }
+    http {
+        client_body_temp_path /tmp/client_body_temp;
+        proxy_temp_path /tmp/proxy_temp;
+        fastcgi_temp_path /tmp/fastcgi_temp;
+        uwsgi_temp_path /tmp/uwsgi_temp;
+        scgi_temp_path /tmp/scgi_temp;
+        server {
+            listen 8080;
+            listen [::]:8080;
+            server_name  localhost;
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+            include /etc/nginx/mime.types;
+            gzip on;
+            gzip_min_length 1000;
+            gzip_proxied expired no-cache no-store private auth;
+            gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+            location /devcenter-api-2.0 {
+                try_files $uri $uri/ /swagger-ui-index.html;
+            }
+            location / {
+                try_files $uri $uri/ /index.html;
+            }
+            location = /index.html {
+                add_header Cache-Control "no-store, no-cache, must-revalidate";
+            }
+        }
+    }
+---
+# Source: harbor/templates/registry/registry-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-registry"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+  config.yml: |+
+    version: 0.1
+    log:
+      level: info
+      fields:
+        service: registry
+    storage:
+      filesystem:
+        rootdirectory: /storage
+      cache:
+        layerinfo: redis
+      maintenance:
+        uploadpurging:
+          enabled: true
+          age: 168h
+          interval: 24h
+          dryrun: false
+      delete:
+        enabled: true
+      redirect:
+        disable: false
+    redis:
+      addr: harbor-redis:6379
+      db: 2
+      readtimeout: 10s
+      writetimeout: 10s
+      dialtimeout: 10s
+      pool:
+        maxidle: 100
+        maxactive: 500
+        idletimeout: 60s
+    http:
+      addr: :5000
+      relativeurls: false
+      # set via environment variable
+      # secret: placeholder
+      debug:
+        addr: localhost:5001
+    auth:
+      htpasswd:
+        realm: harbor-registry-basic-realm
+        path: /etc/registry/passwd
+    validation:
+      disabled: true
+    compatibility:
+      schema1:
+        enabled: true
+  ctl-config.yml: |+
+    ---
+    protocol: "http"
+    port: 8080
+    log_level: info
+    registry_config: "/etc/registry/config.yml"
+---
+# Source: harbor/templates/registry/registryctl-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "harbor-registryctl"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+data:
+---
+# Source: harbor/templates/chartmuseum/chartmuseum-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-chartmuseum
+  annotations:
+    helm.sh/resource-policy: keep
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: chartmuseum
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Source: harbor/templates/jobservice/jobservice-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-jobservice
+  annotations:
+    helm.sh/resource-policy: keep
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: jobservice
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Source: harbor/templates/registry/registry-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-registry
+  annotations:
+    helm.sh/resource-policy: keep
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: registry
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Source: harbor/templates/chartmuseum/chartmuseum-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-chartmuseum"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - port: 80
+      targetPort: 9999
+  selector:
+    release: harbor
+    app: "harbor"
+    component: chartmuseum
+---
+# Source: harbor/templates/core/core-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-core
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - name: http-web
+      port: 80
+      targetPort: 8080
+  selector:
+    release: harbor
+    app: "harbor"
+    component: core
+---
+# Source: harbor/templates/database/database-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-database"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - port: 5432
+  selector:
+    release: harbor
+    app: "harbor"
+    component: database
+---
+# Source: harbor/templates/jobservice/jobservice-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-jobservice"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - name: http-jobservice
+      port: 80
+      targetPort: 8080
+  selector:
+    release: harbor
+    app: "harbor"
+    component: jobservice
+---
+# Source: harbor/templates/notary/notary-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-notary-server
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+  - port: 4443
+  selector:
+    release: harbor
+    app: "harbor"
+    component: notary-server
+---
+# Source: harbor/templates/notary/notary-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-notary-signer
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+  - port: 7899
+  selector:
+    release: harbor
+    app: "harbor"
+    component: notary-signer
+---
+# Source: harbor/templates/portal/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-portal"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    release: harbor
+    app: "harbor"
+    component: portal
+---
+# Source: harbor/templates/redis/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-redis
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - port: 6379
+  selector:
+    release: harbor
+    app: "harbor"
+    component: redis
+---
+# Source: harbor/templates/registry/registry-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-registry"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - name: http-registry
+      port: 5000
+
+    - name: http-controller
+      port: 8080
+  selector:
+    release: harbor
+    app: "harbor"
+    component: registry
+---
+# Source: harbor/templates/trivy/trivy-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "harbor-trivy"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+spec:
+  ports:
+    - name: http-trivy
+      protocol: TCP
+      port: 8080
+  selector:
+    release: harbor
+    app: "harbor"
+    component: trivy
+---
+# Source: harbor/templates/chartmuseum/chartmuseum-dpl.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "harbor-chartmuseum"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: chartmuseum
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: chartmuseum
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: chartmuseum
+      annotations:
+        checksum/configmap: 3a145cb777903ca8ff8fcfcb3c25ed9ee7a426a8b01cf024d6e52d92458b4564
+        checksum/secret: a656851d5f972f5f6dd05a5c13a5a0b21527971b9ec7dd91ce85b5699d41790a
+        checksum/secret-core: a2642e3cf50a6254afe1e025e976f66e279ba09c872685624cb7b95feea36b1e
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      containers:
+      - name: chartmuseum
+        image: goharbor/chartmuseum-photon:v2.7.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTP
+            port: 9999
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTP
+            port: 9999
+          initialDelaySeconds: 1
+          periodSeconds: 10
+        envFrom:
+        - configMapRef:
+            name: "harbor-chartmuseum"
+        - secretRef:
+            name: "harbor-chartmuseum"
+        env:
+          - name: BASIC_AUTH_PASS
+            valueFrom:
+              secretKeyRef:
+                name: harbor-core
+                key: secret
+          - # Needed to make AWS' client connect correctly (see https://github.com/helm/chartmuseum/issues/280)
+            name: AWS_SDK_LOAD_CONFIG
+            value: "1"
+        ports:
+        - containerPort: 9999
+        volumeMounts:
+        - name: chartmuseum-data
+          mountPath: /chart_storage
+          subPath: 
+      volumes:
+      - name: chartmuseum-data
+        persistentVolumeClaim:
+          claimName: harbor-chartmuseum
+---
+# Source: harbor/templates/core/core-dpl.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-core
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: core
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: core
+  template:
+    metadata:
+      labels:
+        release: harbor
+        app: "harbor"
+        component: core
+      annotations:
+        checksum/configmap: c050c0e4fb3810d0b9b1287dd864e93e94889b892af3e21faf6e4363fa10e825
+        checksum/secret: 6eeff0c44f379641a40e980bd8b50f88bf672db4e5009dac477c7b4cd237540f
+        checksum/secret-jobservice: 6d0c91110c50de4a7f5f51197541ca845439da280d96815cfc7d71dc928c286d
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      containers:
+      - name: core
+        image: goharbor/harbor-core:dev
+        imagePullPolicy: IfNotPresent
+        startupProbe:
+          httpGet:
+            path: /api/v2.0/ping
+            scheme: HTTP
+            port: 8080
+          failureThreshold: 360
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /api/v2.0/ping
+            scheme: HTTP
+            port: 8080
+          failureThreshold: 2
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v2.0/ping
+            scheme: HTTP
+            port: 8080
+          failureThreshold: 2
+          periodSeconds: 10
+        envFrom:
+        - configMapRef:
+            name: "harbor-core"
+        - secretRef:
+            name: "harbor-core"
+        env:
+          - name: CORE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: harbor-core
+                key: secret
+          - name: JOBSERVICE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: "harbor-jobservice"
+                key: JOBSERVICE_SECRET
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: config
+          mountPath: /etc/core/app.conf
+          subPath: app.conf
+        - name: secret-key
+          mountPath: /etc/core/key
+          subPath: key
+        - name: token-service-private-key
+          mountPath: /etc/core/private_key.pem
+          subPath: tls.key
+        - name: ca-download
+          mountPath: /etc/core/ca
+        - name: psc
+          mountPath: /etc/core/token
+      volumes:
+      - name: config
+        configMap:
+          name: harbor-core
+          items:
+            - key: app.conf
+              path: app.conf
+      - name: secret-key
+        secret:
+          secretName: harbor-core
+          items:
+            - key: secretKey
+              path: key
+      - name: token-service-private-key
+        secret:
+          secretName: harbor-core
+      - name: ca-download
+        secret:
+          secretName: "harbor-ingress"
+      - name: psc
+        emptyDir: {}
+---
+# Source: harbor/templates/jobservice/jobservice-dpl.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "harbor-jobservice"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: jobservice
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: jobservice
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: jobservice
+      annotations:
+        checksum/configmap: 41138a089428e6776014e59b1a37c5e69bedc9331ccdb1f382f1950882ec1b7e
+        checksum/configmap-env: 5c0e2cf333f81a4f19f13c25cb45f2b2f5353c9bd05f59e8cbb6b59cc0eb7195
+        checksum/secret: 27001e6d975a897883b5c1692e3ee12848a4fe14285d4533d667595e61552b37
+        checksum/secret-core: edff9505ab92ae3dabb48888394d8e70db6f7a2b5b30f4be68ef637aa12cbf9a
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      containers:
+      - name: jobservice
+        image: goharbor/harbor-jobservice:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /api/v1/stats
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v1/stats
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        env:
+          - name: CORE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: harbor-core
+                key: secret
+        envFrom:
+        - configMapRef:
+            name: "harbor-jobservice-env"
+        - secretRef:
+            name: "harbor-jobservice"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: jobservice-config
+          mountPath: /etc/jobservice/config.yml
+          subPath: config.yml
+        - name: job-logs
+          mountPath: /var/log/jobs
+          subPath: 
+      volumes:
+      - name: jobservice-config
+        configMap:
+          name: "harbor-jobservice"
+      - name: job-logs
+        persistentVolumeClaim:
+          claimName: harbor-jobservice
+---
+# Source: harbor/templates/notary/notary-server.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-notary-server
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: notary-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: notary-server
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: notary-server
+      annotations:
+        checksum/secret: 9200abcb8fc8abf7c0cc8debad90e5daaa3da6dabaa8aa9e9faa9b1156860db6
+        checksum/secret-core: 34d431e5097841f190356ed178d89c88938bfa260e030733a80b3295a0f1a5c6
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      containers:
+      - name: notary-server
+        image: goharbor/notary-server-photon:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /_notary_server/health
+            scheme: "HTTP"
+            port: 4443
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /_notary_server/health
+            scheme: "HTTP"
+            port: 4443
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        env:
+        - name: MIGRATIONS_PATH
+          value: migrations/server/postgresql
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: harbor-notary-server
+              key: NOTARY_SERVER_DB_URL
+        volumeMounts:
+        - name: config
+          mountPath: /etc/notary/server-config.postgres.json
+          subPath: server.json
+        - name: token-service-certificate
+          mountPath: /root.crt
+          subPath: tls.crt
+        - name: signer-certificate
+          mountPath: /etc/ssl/notary/ca.crt
+          subPath: ca.crt
+      volumes:
+      - name: config
+        secret:
+          secretName: "harbor-notary-server"
+      - name: token-service-certificate
+        secret:
+          secretName: harbor-core
+      - name: signer-certificate
+        secret:
+          secretName: harbor-notary-server
+---
+# Source: harbor/templates/notary/notary-signer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-notary-signer
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: notary-signer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: notary-signer
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: notary-signer
+      annotations:
+        checksum/secret: 846740c7bf898f8599385513e1068d635b8569461df1b0b183563a55f285a594
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      containers:
+      - name: notary-signer
+        image: goharbor/notary-signer-photon:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            scheme: "HTTPS"
+            port: 7899
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            scheme: "HTTPS"
+            port: 7899
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        env:
+        - name: MIGRATIONS_PATH
+          value: migrations/signer/postgresql
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: harbor-notary-server
+              key: NOTARY_SIGNER_DB_URL
+        - name: NOTARY_SIGNER_DEFAULTALIAS
+          value: defaultalias
+        volumeMounts:
+        - name: config
+          mountPath: /etc/notary/signer-config.postgres.json
+          subPath: signer.json
+        - name: signer-certificate
+          mountPath: /etc/ssl/notary/tls.crt
+          subPath: tls.crt
+        - name: signer-certificate
+          mountPath: /etc/ssl/notary/tls.key
+          subPath: tls.key
+      volumes:
+      - name: config
+        secret:
+          secretName: "harbor-notary-server"
+      - name: signer-certificate
+        secret:
+          secretName: harbor-notary-server
+---
+# Source: harbor/templates/portal/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "harbor-portal"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: portal
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: portal
+  template:
+    metadata:
+      labels:
+        release: harbor
+        app: "harbor"
+        component: portal
+      annotations:
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      containers:
+      - name: portal
+        image: goharbor/harbor-portal:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 1
+          periodSeconds: 10
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: portal-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: portal-config
+        configMap:
+          name: "harbor-portal"
+---
+# Source: harbor/templates/registry/registry-dpl.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "harbor-registry"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: registry
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: registry
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: registry
+      annotations:
+        checksum/configmap: 1dd422c1f80f9b0e00e1a2297e956c1da3fb1d6bc24892179accf38bc1e3be96
+        checksum/secret: 17411fe3391e987d0b0486afd28f03089f5b93ceb52b5a7cba3e4500816ccd78
+        checksum/secret-jobservice: ef6b6cfa22aeb6d46426e3bfc49d41efbd0b253f99d7f60708e9d903534d3f9a
+        checksum/secret-core: c4a0fd1c498ee1b9d7ec2777abd0ad747584aca0337cd1492cef3951a1e39ea2
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+        fsGroupChangePolicy: OnRootMismatch
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      containers:
+      - name: registry
+        image: goharbor/registry-photon:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            scheme: HTTP
+            port: 5000
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            scheme: HTTP
+            port: 5000
+          initialDelaySeconds: 1
+          periodSeconds: 10
+        args: ["serve", "/etc/registry/config.yml"]
+        envFrom:
+        - secretRef:
+            name: "harbor-registry"
+        env:
+        ports:
+        - containerPort: 5000
+        - containerPort: 5001
+        volumeMounts:
+        - name: registry-data
+          mountPath: /storage
+          subPath: 
+        - name: registry-htpasswd
+          mountPath: /etc/registry/passwd
+          subPath: passwd
+        - name: registry-config
+          mountPath: /etc/registry/config.yml
+          subPath: config.yml
+      - name: registryctl
+        image: goharbor/harbor-registryctl:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            scheme: HTTP
+            port: 8080
+          initialDelaySeconds: 1
+          periodSeconds: 10
+        envFrom:
+        - configMapRef:
+            name: "harbor-registryctl"
+        - secretRef:
+            name: "harbor-registry"
+        - secretRef:
+            name: "harbor-registryctl"
+        env:
+        - name: CORE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: harbor-core
+              key: secret
+        - name: JOBSERVICE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: harbor-jobservice
+              key: JOBSERVICE_SECRET
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: registry-data
+          mountPath: /storage
+          subPath: 
+        - name: registry-config
+          mountPath: /etc/registry/config.yml
+          subPath: config.yml
+        - name: registry-config
+          mountPath: /etc/registryctl/config.yml
+          subPath: ctl-config.yml
+      volumes:
+      - name: registry-htpasswd
+        secret:
+          secretName: harbor-registry-htpasswd
+          
+          items:
+            - key: REGISTRY_HTPASSWD
+              path: passwd
+      - name: registry-config
+        configMap:
+          name: "harbor-registry"
+      - name: registry-data
+        persistentVolumeClaim:
+          claimName: harbor-registry
+---
+# Source: harbor/templates/database/database-ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: "harbor-database"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: database
+spec:
+  replicas: 1
+  serviceName: "harbor-database"
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: database
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: database
+      annotations:
+        checksum/secret: 55b1e7be0855a53d12362dc11834f575bd16ba09cdd84b0551bda85635e15ac1
+    spec:
+      securityContext:
+        runAsUser: 999
+        fsGroup: 999
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      initContainers:
+      # as we change the data directory to a sub folder to support psp, the init container here
+      # is used to migrate the existing data. See https://github.com/goharbor/harbor-helm/issues/756
+      # for more detail.
+      # we may remove it after several releases
+      - name: "data-migrator"
+        image: goharbor/harbor-db:dev
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh"]
+        args: ["-c", "[ -e /var/lib/postgresql/data/postgresql.conf ] && [ ! -d /var/lib/postgresql/data/pgdata ] && mkdir -m 0700 /var/lib/postgresql/data/pgdata && mv /var/lib/postgresql/data/* /var/lib/postgresql/data/pgdata/ || true"]
+        volumeMounts:
+          - name: database-data
+            mountPath: /var/lib/postgresql/data
+            subPath: 
+      # with "fsGroup" set, each time a volume is mounted, Kubernetes must recursively chown() and chmod() all the files and directories inside the volume
+      # this causes the postgresql reports the "data directory /var/lib/postgresql/data/pgdata has group or world access" issue when using some CSIs e.g. Ceph
+      # use this init container to correct the permission
+      # as "fsGroup" applied before the init container running, the container has enough permission to execute the command
+      - name: "data-permissions-ensurer"
+        image: goharbor/harbor-db:dev
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh"]
+        args: ["-c", "chmod -R 700 /var/lib/postgresql/data/pgdata || true"]
+        volumeMounts:
+          - name: database-data
+            mountPath: /var/lib/postgresql/data
+            subPath: 
+      containers:
+      - name: database
+        image: goharbor/harbor-db:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /docker-healthcheck.sh
+          initialDelaySeconds: 300
+          periodSeconds: 10
+          timeoutSeconds: 1
+        readinessProbe:
+          exec:
+            command:
+            - /docker-healthcheck.sh
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          timeoutSeconds: 1
+        envFrom:
+          - secretRef:
+              name: "harbor-database"
+        env:
+          # put the data into a sub directory to avoid the permission issue in k8s with restricted psp enabled
+          # more detail refer to https://github.com/goharbor/harbor-helm/issues/756
+          - name: PGDATA
+            value: "/var/lib/postgresql/data/pgdata"
+        volumeMounts:
+        - name: database-data
+          mountPath: /var/lib/postgresql/data
+          subPath: 
+        - name: shm-volume
+          mountPath: /dev/shm
+      volumes:
+      - name: shm-volume
+        emptyDir:
+          medium: Memory
+          sizeLimit: 512Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: "database-data"
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+      annotations:
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: "1Gi"
+---
+# Source: harbor/templates/redis/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: harbor-redis
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: redis
+spec:
+  replicas: 1
+  serviceName: harbor-redis
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: redis
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: redis
+    spec:
+      securityContext:
+        runAsUser: 999
+        fsGroup: 999
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      containers:
+      - name: redis
+        image: goharbor/redis-photon:dev
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 300
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 1
+          periodSeconds: 10
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/redis
+          subPath: 
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+      annotations:
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: "1Gi"
+---
+# Source: harbor/templates/trivy/trivy-sts.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: harbor-trivy
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+    component: trivy
+spec:
+  replicas: 1
+  serviceName: harbor-trivy
+  selector:
+    matchLabels:
+      release: harbor
+      app: "harbor"
+      component: trivy
+  template:
+    metadata:
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+        component: trivy
+      annotations:
+        checksum/secret: 81105cb33a8cb2937d69d3a39d46a94953951b6154c8518d288852bcf66b4d6d
+    spec:
+      securityContext:
+        runAsUser: 10000
+        fsGroup: 10000
+      automountServiceAccountToken: false
+      containers:
+        - name: trivy
+          image: goharbor/trivy-adapter-photon:dev
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+          env:
+            - name: HTTP_PROXY
+              value: ""
+            - name: HTTPS_PROXY
+              value: ""
+            - name: NO_PROXY
+              value: "harbor-core,harbor-jobservice,harbor-database,harbor-chartmuseum,harbor-notary-server,harbor-notary-signer,harbor-registry,harbor-portal,harbor-trivy,harbor-exporter,127.0.0.1,localhost,.local,.internal"
+            - name: "SCANNER_LOG_LEVEL"
+              value: "info"
+            - name: "SCANNER_TRIVY_CACHE_DIR"
+              value: "/home/scanner/.cache/trivy"
+            - name: "SCANNER_TRIVY_REPORTS_DIR"
+              value: "/home/scanner/.cache/reports"
+            - name: "SCANNER_TRIVY_DEBUG_MODE"
+              value: "false"
+            - name: "SCANNER_TRIVY_VULN_TYPE"
+              value: "os,library"
+            - name: "SCANNER_TRIVY_TIMEOUT"
+              value: "5m0s"
+            - name: "SCANNER_TRIVY_GITHUB_TOKEN"
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-trivy
+                  key: gitHubToken
+            - name: "SCANNER_TRIVY_SEVERITY"
+              value: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
+            - name: "SCANNER_TRIVY_IGNORE_UNFIXED"
+              value: "false"
+            - name: "SCANNER_TRIVY_SKIP_UPDATE"
+              value: "false"
+            - name: "SCANNER_TRIVY_OFFLINE_SCAN"
+              value: "false"
+            - name: "SCANNER_TRIVY_SECURITY_CHECKS"
+              value: "vuln"
+            - name: "SCANNER_TRIVY_INSECURE"
+              value: "false"
+            - name: SCANNER_API_SERVER_ADDR
+              value: ":8080"
+            - name: "SCANNER_REDIS_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-trivy
+                  key: redisURL
+            - name: "SCANNER_STORE_REDIS_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-trivy
+                  key: redisURL
+            - name: "SCANNER_JOB_QUEUE_REDIS_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-trivy
+                  key: redisURL
+          ports:
+            - name: api-server
+              containerPort: 8080
+          volumeMounts:
+          - name: data
+            mountPath: /home/scanner/.cache
+            subPath: 
+            readOnly: false
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /probe/healthy
+              port: api-server
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /probe/ready
+              port: api-server
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        heritage: Helm
+        release: harbor
+        chart: harbor
+        app: "harbor"
+      annotations:
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: "5Gi"
+---
+# Source: harbor/templates/ingress/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "harbor-ingress"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: "0"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - secretName: harbor-ingress
+    hosts:
+    - core.harbor.xip.io
+  rules:
+  - http:
+      paths:
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-core
+            port:
+              number: 80
+      - path: /service/
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-core
+            port:
+              number: 80
+      - path: /v2/
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-core
+            port:
+              number: 80
+      - path: /chartrepo/
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-core
+            port:
+              number: 80
+      - path: /c/
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-core
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-portal
+            port:
+              number: 80
+    host: core.harbor.xip.io
+---
+# Source: harbor/templates/ingress/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "harbor-ingress-notary"
+  labels:
+    heritage: Helm
+    release: harbor
+    chart: harbor
+    app: "harbor"
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: "0"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - secretName: harbor-ingress
+    hosts:
+    - notary.harbor.xip.io
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor-notary-server
+            port:
+              number: 4443
+    host: notary.harbor.xip.io

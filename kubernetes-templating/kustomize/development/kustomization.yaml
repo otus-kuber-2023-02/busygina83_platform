@@ -1,0 +1,10 @@
+namespace: hipster-shop
+namePrefix: dev-
+nameSuffix: "-dev"
+commonLabels:
+  app: dev
+commonAnnotations:
+  note: development
+resources:
+- productcatalogservice-deployment.yaml
+- productcatalogservice-service.yaml

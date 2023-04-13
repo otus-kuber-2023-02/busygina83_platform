@@ -1,0 +1,10 @@
+namespace: hipster-shop-prod
+namePrefix: prod-
+nameSuffix: "-prod"
+commonLabels:
+  app: prod
+commonAnnotations:
+  note: production
+resources:
+- productcatalogservice-deployment.yaml
+- productcatalogservice-service.yaml
