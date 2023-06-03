@@ -1,0 +1,12 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: infra-cluster
+nodes:
+- role: worker
+- role: worker
+- role: worker
+- role: worker
+- role: control-plane
+#kubectl taint nodes infra-cluster-worker2 node-role=infra:NoSchedule
+#kubectl taint nodes infra-cluster-worker3 node-role=infra:NoSchedule
+#kubectl taint nodes infra-cluster-worker4 node-role=infra:NoSchedule

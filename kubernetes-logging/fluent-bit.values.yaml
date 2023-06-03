@@ -1,0 +1,44 @@
+backend:
+  type: es
+  es:
+    host: elasticsearch-master
+    #port: 9200
+    #index: kubernetes_cluster
+    #type: flb_type
+    #logstash_prefix: kubernetes_cluster
+    #replace_dots: "On"
+    #logstash_format: "On"
+    #retry_limit: "False"
+    #time_key: '@ts'
+    #http_do: https
+    #http_user: elastic
+    #http_passwd: 747p6nME3K4wXmo9
+    #tls: "on"
+    #scheme: https
+    #tls_verify: "on"
+    #tls_ca: ""
+    #tls_debug: 1
+rawConfig: |
+  @INCLUDE fluent-bit-service.conf
+  @INCLUDE fluent-bit-input.conf
+  @INCLUDE fluent-bit-filter.conf
+  @INCLUDE fluent-bit-output.conf
+  [FILTER]
+    Name modify
+    Match *
+    Remove time
+    Remove @timestamp
+filter:
+    mergeLogKey: "app"
+audit:
+  enable: true
+  input:
+    memBufLimit: 35MB
+    parser: docker
+    tag: audit.*
+    path: /var/log/kube-audit/audit.log
+    bufferChunkSize: 2MB
+    bufferMaxSize: 10MB
+    skipLongLines: On
+    key: kubernetes-audit
+
