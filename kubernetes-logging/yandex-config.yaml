@@ -1,0 +1,15 @@
+kind: Cluster
+apiVersion: x-k8s.io/v1alpha4
+name: cluster-busygina83
+nodes:
+- name: cl1q45lhcik9okq0fbus-egyz
+- name: cl1q45lhcik9okq0fbus-ycem
+- name: cl1q45lhcik9okq0fbus-yxug
+- name: cl1q45lhcik9okq0fbus-utoc
+kubectl taint nodes cl1q45lhcik9okq0fbus-egyz node-role=infra:NoSchedule
+kubectl taint nodes cl1q45lhcik9okq0fbus-ycem node-role=infra:NoSchedule
+kubectl taint nodes cl1q45lhcik9okq0fbus-yxug node-role=infra:NoSchedule
+kubectl label nodes cl1q45lhcik9okq0fbus-egyz nodePool=infra-pool
+kubectl label nodes cl1q45lhcik9okq0fbus-ycem nodePool=infra-pool
+kubectl label nodes cl1q45lhcik9okq0fbus-yxug nodePool=infra-pool
+kubectl label nodes cl1hm4h4emntuetf6flj-utoc nodePool=default-pool

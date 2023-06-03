@@ -1,0 +1,7 @@
+tolerations:
+- key: node-role
+  operator: Equal
+  value: infra
+  effect: NoSchedule
+nodeSelector:
+  nodePool: infra-pool
